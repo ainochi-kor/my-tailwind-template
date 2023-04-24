@@ -1,12 +1,14 @@
 import Autocomplete from "@/components/Autocomplete";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import TextField from "@/components/TextField";
 import Typography from "@/components/Typography";
 import { NextPage } from "next";
 import Image from "next/image";
 import { useState } from "react";
-import { TEST_AREA } from "src/constant/tailwindcss";
 import { test_autocomplete_item } from "src/data/test";
+
+export const TEST_AREA = "w-1/4 space-y-2 border-blue-600 border p-2";
 
 const TestPage: NextPage = () => {
   const [autoCompleteInput, setAutoCompleteInput] = useState("");
@@ -94,14 +96,15 @@ const TestPage: NextPage = () => {
         <Input placeholder="ID" type="text" />
         <Input placeholder="PASSWORD" type="password" />
       </div>
-      <div className={TEST_AREA}>
+      <div className={`${TEST_AREA} space-y-3`}>
         <Autocomplete
           options={test_autocomplete_item}
           inputValue={autoCompleteInput}
           updateInputValue={updateAutoCompleteInput}
         />
+        <TextField label="Label" />
       </div>
-      <div className={TEST_AREA}></div>
+      <div className={`${TEST_AREA} space-y-2`}></div>
     </main>
   );
 };
