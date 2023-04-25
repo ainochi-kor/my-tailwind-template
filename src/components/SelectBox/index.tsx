@@ -85,11 +85,11 @@ const SelectBox: React.FC<P> = ({
       <div
         className={`
         flex items-center w-full h-11 px-3 py-2 justify-between
-        cursor-pointer border border-gray-300 rounded-2xl 
+        cursor-pointer border  rounded 
         ${
           open || (value && value?.length > 0)
             ? "bg-white border-blue-500"
-            : "bg-blue-50"
+            : "bg-blue-50 border-gray-300"
         }
         
         `}
@@ -99,7 +99,7 @@ const SelectBox: React.FC<P> = ({
         <span>{getSelectValueText(value)}</span>
       </div>
       {open && (
-        <ul className="absolute w-full py-2 bg-white border border-gray-100 rounded z-10">
+        <ul className="absolute w-full py-2 bg-white border border-gray-300 rounded z-10 mt-1">
           {options.map((option, index) => (
             <li
               key={index}
@@ -135,10 +135,10 @@ const SelectBox: React.FC<P> = ({
         </ul>
       )}
       <label
-        className={`absolute left-3 text-gray-700 ${
+        className={`absolute left-3  ${
           open || (value && value?.length > 0)
             ? "text-micro text-blue-500 -top-10px bg-white px-1 rounded-sm"
-            : "text-small top-1/4"
+            : "text-small top-1/4 text-gray-700"
         } transition-all duration-200`}
       >
         {label}

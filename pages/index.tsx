@@ -6,19 +6,24 @@ import TextField from "@/components/TextField";
 import Typography from "@/components/Typography";
 import { NextPage } from "next";
 import Image from "next/image";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { test_autocomplete_item } from "src/data/test";
 
-export const TEST_AREA = "w-1/4 space-y-2 border-blue-600 border p-2";
+export const TEST_AREA = "w-1/4 space-y-3 border-blue-600 border py-3 px-2";
 const exam_select = ["a", "b"];
 
 const TestPage: NextPage = () => {
+  const [textFile, setTextFiled] = useState("");
   const [autoCompleteInput, setAutoCompleteInput] = useState("");
   const [selectValue, setSelectValue] = useState<string | string[]>();
   const [selectMultiValue, setSelectMultiValue] = useState<string | string[]>();
 
   const updateAutoCompleteInput = (newValue: string) => {
     setAutoCompleteInput(newValue);
+  };
+
+  const updateTextFiled = (e: ChangeEvent<HTMLInputElement>) => {
+    setTextFiled(e.target.value);
   };
 
   const changeSelectBox = (option: string | string[]) => {
@@ -108,15 +113,20 @@ const TestPage: NextPage = () => {
         <Input placeholder="ID" type="text" />
         <Input placeholder="PASSWORD" type="password" />
       </div>
-      <div className={`${TEST_AREA} space-y-3`}>
+      <div className={`${TEST_AREA} space-y-3 `}>
         <Autocomplete
           options={test_autocomplete_item}
           inputValue={autoCompleteInput}
           updateInputValue={updateAutoCompleteInput}
+          label="Autocomplete"
         />
-        <TextField label="Label" />
+        <TextField
+          label="Text Field"
+          onChange={updateTextFiled}
+          value={textFile}
+        />
         <SelectBox
-          label="Label"
+          label="Single"
           onChange={changeSelectBox}
           options={exam_select}
           value={selectValue}
