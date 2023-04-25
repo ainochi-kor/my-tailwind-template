@@ -1,6 +1,7 @@
 import Autocomplete from "@/components/Autocomplete";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import SelectBox from "@/components/SelectBox";
 import TextField from "@/components/TextField";
 import Typography from "@/components/Typography";
 import { NextPage } from "next";
@@ -9,12 +10,23 @@ import { useState } from "react";
 import { test_autocomplete_item } from "src/data/test";
 
 export const TEST_AREA = "w-1/4 space-y-2 border-blue-600 border p-2";
+const exam_select = ["a", "b"];
 
 const TestPage: NextPage = () => {
   const [autoCompleteInput, setAutoCompleteInput] = useState("");
+  const [selectValue, setSelectValue] = useState<string | string[]>();
+  const [selectMultiValue, setSelectMultiValue] = useState<string | string[]>();
 
   const updateAutoCompleteInput = (newValue: string) => {
     setAutoCompleteInput(newValue);
+  };
+
+  const changeSelectBox = (option: string | string[]) => {
+    setSelectValue(option);
+  };
+
+  const changeMultiSelectBox = (option: string | string[]) => {
+    setSelectMultiValue(option);
   };
 
   return (
@@ -103,6 +115,19 @@ const TestPage: NextPage = () => {
           updateInputValue={updateAutoCompleteInput}
         />
         <TextField label="Label" />
+        <SelectBox
+          label="Label"
+          onChange={changeSelectBox}
+          options={exam_select}
+          value={selectValue}
+        />
+        <SelectBox
+          label="Multiple"
+          onChange={changeMultiSelectBox}
+          options={exam_select}
+          value={selectMultiValue}
+          multiple
+        />
       </div>
       <div className={`${TEST_AREA} space-y-2`}></div>
     </main>

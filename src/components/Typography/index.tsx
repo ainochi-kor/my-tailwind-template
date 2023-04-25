@@ -10,7 +10,7 @@ interface P extends PropsWithChildren, TypographyProps {
 
 const getTypographyTheme = (theme?: TypographyTheme) => {
   if (theme === "primary") {
-    return "text-primary";
+    return "text-blue-500";
   }
   return DEFAULT_TEXT_COLOR;
 };

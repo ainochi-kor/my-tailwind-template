@@ -19,6 +19,12 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     setOpen(true);
   };
 
+  const handleBlur = (e: React.FocusEvent) => {
+    if (!divRef.current?.contains(e.relatedTarget as Node)) {
+      setOpen(false);
+    }
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateInputValue(e.target.value);
   };
@@ -43,12 +49,6 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
       );
     }
   }, [inputValue]);
-
-  const handleBlur = (e: React.FocusEvent) => {
-    if (!divRef.current?.contains(e.relatedTarget as Node)) {
-      setOpen(false);
-    }
-  };
 
   return (
     <div ref={divRef} onBlur={handleBlur} className="relative">
