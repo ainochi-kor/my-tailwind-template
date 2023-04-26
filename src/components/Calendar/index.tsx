@@ -79,7 +79,6 @@ const MonthlyCalendar: React.FC<CalendarProps> = () => {
 
   const onTransitionEnd = (swiper: SwiperCore) => {
     const direction = swiper.activeIndex - swiper.previousIndex;
-    console.log("direction", direction);
     setCurrentMonth(currentMonth.add(direction, "month"));
     swiper.slideTo(1);
   };

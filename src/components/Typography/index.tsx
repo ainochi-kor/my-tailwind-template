@@ -91,6 +91,7 @@ const Typography: React.FC<P> = ({
   fontSize = 16,
   align = "inherit",
   tailwindcss,
+  color,
   ...props
 }) => {
   return (
@@ -99,6 +100,8 @@ const Typography: React.FC<P> = ({
         ${getTypographyTheme(theme)} 
         ${getFontSize(fontSize)} 
         ${getTextAlign(align)}
+        ${color}
+        ${tailwindcss}
       `}
       {...props}
     >
