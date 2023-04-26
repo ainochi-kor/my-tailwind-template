@@ -17,6 +17,7 @@ interface CalendarProps {}
 const MonthlyCalendar: React.FC<CalendarProps> = () => {
   const [currentMonth, setCurrentMonth] = useState(dayjs());
   const [selectedDates, setSelectedDates] = useState<dayjs.Dayjs[]>([]);
+  const [direction, setDirection] = useState(0);
 
   console.log("currentMonth", currentMonth.month());
 
@@ -78,9 +79,13 @@ const MonthlyCalendar: React.FC<CalendarProps> = () => {
   };
 
   const onTransitionEnd = (swiper: SwiperCore) => {
-    const direction = swiper.activeIndex - swiper.previousIndex;
-    setCurrentMonth(currentMonth.add(direction, "month"));
-    swiper.slideTo(1);
+    if (swiper.activeIndex === 1) {
+      setCurrentMonth(currentMonth.add(direction, "month"));
+      setDirection(0);
+    } else {
+      setDirection(swiper.activeIndex - swiper.previousIndex);
+      swiper.slideTo(1);
+    }
   };
 
   useEffect(() => {
@@ -120,6 +125,7 @@ const MonthlyCalendar: React.FC<CalendarProps> = () => {
         <DayWeekLabel>S</DayWeekLabel>
       </div>
       <Swiper
+        speed={1}
         spaceBetween={0}
         slidesPerView={1}
         navigation={{
