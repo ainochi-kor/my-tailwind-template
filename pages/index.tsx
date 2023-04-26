@@ -1,9 +1,11 @@
 import Autocomplete from "@/components/Autocomplete";
 import Button from "@/components/Button";
+import Calendar from "@/components/Calendar";
 import Input from "@/components/Input";
 import SelectBox from "@/components/SelectBox";
 import TextField from "@/components/TextField";
 import Typography from "@/components/Typography";
+import dayjs from "dayjs";
 import { NextPage } from "next";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
@@ -13,6 +15,7 @@ export const TEST_AREA = "w-1/4 space-y-3 border-blue-600 border py-3 px-2";
 const exam_select = ["a", "b"];
 
 const TestPage: NextPage = () => {
+  const currentDate = dayjs();
   const [textFile, setTextFiled] = useState("");
   const [autoCompleteInput, setAutoCompleteInput] = useState("");
   const [selectValue, setSelectValue] = useState<string | string[]>();
@@ -139,7 +142,9 @@ const TestPage: NextPage = () => {
           multiple
         />
       </div>
-      <div className={`${TEST_AREA} space-y-2`}></div>
+      <div className={`${TEST_AREA} space-y-2`}>
+        <Calendar />
+      </div>
     </main>
   );
 };
