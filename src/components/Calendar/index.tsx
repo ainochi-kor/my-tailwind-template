@@ -4,22 +4,18 @@ import React, { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import Typography from "../Typography";
 import Image from "next/image";
-
-import "swiper/css";
-import SwiperCore, { Navigation } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
 import DayWeekLabel from "./DayWeekLabel";
 
-SwiperCore.use([Navigation]);
+interface CalendarProps {
+  selectedDates: dayjs.Dayjs[];
+  selectDate: (day: dayjs.Dayjs) => void;
+}
 
-interface CalendarProps {}
-
-const MonthlyCalendar: React.FC<CalendarProps> = () => {
+const MonthlyCalendar: React.FC<CalendarProps> = ({
+  selectedDates,
+  selectDate,
+}) => {
   const [currentMonth, setCurrentMonth] = useState(dayjs());
-  const [selectedDates, setSelectedDates] = useState<dayjs.Dayjs[]>([]);
-  const [direction, setDirection] = useState(0);
-
-  console.log("currentMonth", currentMonth.month());
 
   const generateCalendarGrid = (month: dayjs.Dayjs) => {
     const startOfMonth = month.startOf("month").startOf("week");
@@ -37,12 +33,12 @@ const MonthlyCalendar: React.FC<CalendarProps> = () => {
     return days;
   };
 
-  const selectDate = (day: dayjs.Dayjs) => {
-    if (selectedDates.length < 2) {
-      setSelectedDates([...selectedDates, day]);
-    } else {
-      setSelectedDates([day]);
-    }
+  const prevMonth = () => {
+    setCurrentMonth(currentMonth.subtract(1, "month"));
+  };
+
+  const nextMonth = () => {
+    setCurrentMonth(currentMonth.add(1, "month"));
   };
 
   const isSelected = (day: dayjs.Dayjs) =>
@@ -78,16 +74,6 @@ const MonthlyCalendar: React.FC<CalendarProps> = () => {
     );
   };
 
-  const onTransitionEnd = (swiper: SwiperCore) => {
-    if (swiper.activeIndex === 1) {
-      setCurrentMonth(currentMonth.add(direction, "month"));
-      setDirection(0);
-    } else {
-      setDirection(swiper.activeIndex - swiper.previousIndex);
-      swiper.slideTo(1);
-    }
-  };
-
   useEffect(() => {
     setCurrentMonth(currentMonth);
   }, [currentMonth]);
@@ -100,14 +86,14 @@ const MonthlyCalendar: React.FC<CalendarProps> = () => {
         </Typography>
         <div className="flex">
           <Image
-            className="swiper-calendar-navigetion-prev"
+            onClick={() => prevMonth()}
             src="/images/ic-pre.png"
             width={20}
             height={20}
             alt="prev"
           />
           <Image
-            className="swiper-calendar-navigetion-next"
+            onClick={() => nextMonth()}
             src="/images/ic-next.png"
             width={20}
             height={20}
@@ -124,26 +110,7 @@ const MonthlyCalendar: React.FC<CalendarProps> = () => {
         <DayWeekLabel>F</DayWeekLabel>
         <DayWeekLabel>S</DayWeekLabel>
       </div>
-      <Swiper
-        speed={1}
-        spaceBetween={0}
-        slidesPerView={1}
-        navigation={{
-          prevEl: ".swiper-calendar-navigetion-prev",
-          nextEl: ".swiper-calendar-navigetion-next",
-        }}
-        onTransitionEnd={onTransitionEnd}
-        onSwiper={(swiper) => swiper.slideTo(1)}
-        initialSlide={1}
-      >
-        <SwiperSlide>
-          {renderCalendarGrid(currentMonth.subtract(1, "month"))}
-        </SwiperSlide>
-        <SwiperSlide>{renderCalendarGrid(currentMonth)}</SwiperSlide>
-        <SwiperSlide>
-          {renderCalendarGrid(currentMonth.add(1, "month"))}
-        </SwiperSlide>
-      </Swiper>
+      {renderCalendarGrid(currentMonth)}
     </div>
   );
 };

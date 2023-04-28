@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import Calendar from "@/components/Calendar";
 import Input from "@/components/Input";
 import SelectBox from "@/components/SelectBox";
+import CalendarSelectBox from "@/components/SelectBox/SelectBoxWithCalendar";
 import TextField from "@/components/TextField";
 import Typography from "@/components/Typography";
 import dayjs from "dayjs";
@@ -20,6 +21,23 @@ const TestPage: NextPage = () => {
   const [autoCompleteInput, setAutoCompleteInput] = useState("");
   const [selectValue, setSelectValue] = useState<string | string[]>();
   const [selectMultiValue, setSelectMultiValue] = useState<string | string[]>();
+  const [selectedDates, setSelectedDates] = useState<dayjs.Dayjs[]>([]);
+
+  const selectDate = (day: dayjs.Dayjs) => {
+    setSelectedDates((prevSelectedDates) => {
+      const prevSelectedDatesValue = prevSelectedDates.map((date) =>
+        date.valueOf()
+      );
+      const dayValue = day.valueOf();
+      if (prevSelectedDatesValue.includes(dayValue)) {
+        const outIndex = prevSelectedDatesValue.indexOf(dayValue);
+        const newSelectedDates = [...prevSelectedDates];
+        newSelectedDates.splice(outIndex, 1);
+        return newSelectedDates;
+      }
+      return [...prevSelectedDates, day];
+    });
+  };
 
   const updateAutoCompleteInput = (newValue: string) => {
     setAutoCompleteInput(newValue);
@@ -143,7 +161,12 @@ const TestPage: NextPage = () => {
         />
       </div>
       <div className={`${TEST_AREA} space-y-2`}>
-        <Calendar />
+        <Calendar selectedDates={selectedDates} selectDate={selectDate} />
+        <CalendarSelectBox
+          label="CalendarSelectBox"
+          selectedDates={selectedDates}
+          selectDate={selectDate}
+        />
       </div>
     </main>
   );
