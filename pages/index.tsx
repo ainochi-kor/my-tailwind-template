@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import Calendar from "@/components/Calendar";
 import Input from "@/components/Input";
 import SelectBox from "@/components/SelectBox";
+import CalendarSelectBox from "@/components/SelectBox/SelectBoxWithCalendar";
 import TextField from "@/components/TextField";
 import Typography from "@/components/Typography";
 import dayjs from "dayjs";
@@ -144,6 +145,7 @@ const TestPage: NextPage = () => {
       </div>
       <div className={`${TEST_AREA} space-y-2`}>
         <Calendar />
+        <CalendarSelectBox />
       </div>
     </main>
   );
