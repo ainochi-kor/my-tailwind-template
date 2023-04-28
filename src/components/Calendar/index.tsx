@@ -6,11 +6,16 @@ import Typography from "../Typography";
 import Image from "next/image";
 import DayWeekLabel from "./DayWeekLabel";
 
-interface CalendarProps {}
+interface CalendarProps {
+  selectedDates: dayjs.Dayjs[];
+  selectDate: (day: dayjs.Dayjs) => void;
+}
 
-const MonthlyCalendar: React.FC<CalendarProps> = () => {
+const MonthlyCalendar: React.FC<CalendarProps> = ({
+  selectedDates,
+  selectDate,
+}) => {
   const [currentMonth, setCurrentMonth] = useState(dayjs());
-  const [selectedDates, setSelectedDates] = useState<dayjs.Dayjs[]>([]);
 
   const generateCalendarGrid = (month: dayjs.Dayjs) => {
     const startOfMonth = month.startOf("month").startOf("week");
@@ -26,22 +31,6 @@ const MonthlyCalendar: React.FC<CalendarProps> = () => {
     }
 
     return days;
-  };
-
-  const selectDate = (day: dayjs.Dayjs) => {
-    setSelectedDates((prevSelectedDates) => {
-      const prevSelectedDatesValue = prevSelectedDates.map((date) =>
-        date.valueOf()
-      );
-      const dayValue = day.valueOf();
-      if (prevSelectedDatesValue.includes(dayValue)) {
-        const outIndex = prevSelectedDatesValue.indexOf(dayValue);
-        const newSelectedDates = [...prevSelectedDates];
-        newSelectedDates.splice(outIndex, 1);
-        return newSelectedDates;
-      }
-      return [...prevSelectedDates, day];
-    });
   };
 
   const prevMonth = () => {

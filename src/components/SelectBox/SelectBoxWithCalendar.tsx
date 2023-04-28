@@ -1,35 +1,34 @@
 import Image from "next/image";
 import React, { useState, useRef, useEffect, MouseEvent } from "react";
-import MonthlyCalendar from "../Calendar/index";
+import MonthlyCalendar from "../Calendar";
 import dayjs, { Dayjs } from "dayjs";
 
 interface P {
-  label?: string;
+  label: string;
+  selectedDates: dayjs.Dayjs[];
+  selectDate: (day: dayjs.Dayjs) => void;
 }
 
 const getSelectValueTags = (dates: dayjs.Dayjs[]) => {
-  return dates
+  let text = "";
+  dates
     .sort((date1, date2) => date1.valueOf() - date2.valueOf())
-    .map((date) => {
-      const text = date.format("MM/DD");
-      return (
-        <div
-          key={text}
-          className="px-3 py-1 bg-grey-50"
-          style={{ borderRadius: 20 }}
-        >
-          {text}
-        </div>
-      );
+    .forEach((date, idx) => {
+      text += date.format("MM/DD");
+      if (dates.length - 1 !== idx) {
+        text += ", ";
+      }
     });
+
+  return text;
 };
 
-const CalendarSelectBox: React.FC<P> = ({ label }) => {
+const CalendarSelectBox: React.FC<P> = ({
+  label,
+  selectedDates,
+  selectDate,
+}) => {
   const [open, setOpen] = useState(false);
-  const [selectedDates, setSelectedDates] = useState<dayjs.Dayjs[]>([]);
-
-  
-
   const selectWrapperRef = useRef<HTMLDivElement>(null);
 
   const handleFocusIn = () => {
@@ -49,15 +48,10 @@ const CalendarSelectBox: React.FC<P> = ({ label }) => {
       className="relative w-full"
       tabIndex={0}
     >
-      <div className={`${selectedDates.length > 0 ? "py-4" : "h-11"} rounded `}>
-        <span className="text-selectbox flex flex-wrap gap-1 invisible">
-          {getSelectValueTags(selectedDates)}
-        </span>
-      </div>
       <div
         className={`
-        absolute top-0
-        w-full px-3 ${selectedDates.length > 0 ? "py-4" : "h-11"}
+        top-0
+        w-full px-3 ${open && selectedDates.length > 0 ? "py-4" : "h-11"}
         flex items-center justify-between
         cursor-pointer rounded-2xl z-20
         ${
@@ -65,14 +59,17 @@ const CalendarSelectBox: React.FC<P> = ({ label }) => {
             ? "bg-white border border-blue-500"
             : "bg-blue-50"
         }
-        
         `}
         onClick={() => setOpen(!open)}
         onFocus={handleFocusIn}
       >
-        <span className="text-selectbox flex flex-wrap gap-1 ">
+        <div
+          className={`text-selectbox  ${
+            open && "flex flex-wrap gap-1"
+          } text-ellipsis whitespace-nowrap overflow-hidden `}
+        >
           {getSelectValueTags(selectedDates)}
-        </span>
+        </div>
         <Image
           className={open ? "rotate-180" : ""}
           src={"/images/ic-drop.png"}
@@ -83,7 +80,10 @@ const CalendarSelectBox: React.FC<P> = ({ label }) => {
       </div>
       {open && (
         <div className="absolute w-full z-10">
-          <MonthlyCalendar />
+          <MonthlyCalendar
+            selectedDates={selectedDates}
+            selectDate={selectDate}
+          />
         </div>
       )}
       <label
