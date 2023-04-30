@@ -53,11 +53,11 @@ const CalendarSelectBox: React.FC<P> = ({
         top-0
         w-full px-3 ${open && selectedDates.length > 0 ? "py-4" : "h-11"}
         flex items-center justify-between
-        cursor-pointer rounded-2xl z-20
+        cursor-pointer rounded z-20 border
         ${
           open || selectedDates.length > 0
-            ? "bg-white border border-blue-500"
-            : "bg-blue-50"
+            ? "bg-white  border-blue-500"
+            : "bg-blue-50 border-gray-300"
         }
         `}
         onClick={() => setOpen(!open)}
