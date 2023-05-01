@@ -24,10 +24,10 @@ const getButtonHight = (size: ButtonSize) => {
 
 const getButtonTheme = (theme?: ButtonTheme) => {
   if (theme === "primary") {
-    return " bg-blue-600 text-white";
+    return "bg-blue-600 text-white hover:bg-blue-500 active:bg-blue-700";
   }
   if (theme === "cancel") {
-    return "bg-gray-600 text-white";
+    return "bg-gray-600 text-white hover:bg-gray-500 active:bg-gray-700";
   }
   return DEFAULT_TEXT_COLOR;
 };
@@ -41,11 +41,11 @@ const Button: React.FC<P> = ({
 }) => {
   return (
     <button
-      className={`${
-        fullWidth ? "w-full" : "px-3"
-      } h-13 rounded flex justify-center items-center ${getButtonHight(
-        size
-      )} ${getButtonTheme(theme)}
+      className={`
+      h-13 rounded flex justify-center items-center
+      ${fullWidth ? "w-full" : "px-3"}  
+      ${getButtonHight(size)} 
+      ${getButtonTheme(theme)}
       `}
       {...props}
     >
