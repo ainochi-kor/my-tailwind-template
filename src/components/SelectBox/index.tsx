@@ -97,6 +97,20 @@ const SelectBox: React.FC<P> = ({
         onFocus={handleFocusIn}
       >
         <span>{getSelectValueText(value)}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className={`w-5 h-5 ${open ? "rotate-180" : ""}`}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+          />
+        </svg>
       </div>
       {open && (
         <ul className="absolute w-full py-2 bg-white border border-gray-300 rounded z-10 mt-1">
@@ -127,7 +141,24 @@ const SelectBox: React.FC<P> = ({
                   }  
                   
                 `}
-                ></div>
+                >
+                  {getCheckOfSelectedValue(multiple, option, value) && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-5 h-5 text-white"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                  )}
+                </div>
               )}
               {option}
             </li>
