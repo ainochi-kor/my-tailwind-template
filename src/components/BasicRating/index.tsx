@@ -20,7 +20,7 @@ const BasicRating: React.FC<P> = ({ maxRating = 5 }) => {
         <button
           key={star}
           className={`p-1 ${
-            (hover || rating) >= star ? "text-yellow-500" : "text-gray-300"
+            (hover || rating) >= star ? "text-yellow-400" : "text-gray-300"
           } transition-colors duration-200`}
           onMouseEnter={() => onMouseEnter(star)}
           onMouseLeave={onMouseLeave}
