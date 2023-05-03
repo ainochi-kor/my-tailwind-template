@@ -1,4 +1,5 @@
 import Autocomplete from "@/components/Autocomplete";
+import BasicRating from "@/components/BasicRating";
 import Button from "@/components/Button";
 import Calendar from "@/components/Calendar";
 import Input from "@/components/Input";
@@ -159,15 +160,15 @@ const TestPage: NextPage = () => {
           value={selectMultiValue}
           multiple
         />
-      </div>
-      <div className={`${TEST_AREA} space-y-2`}>
         <Calendar selectedDates={selectedDates} selectDate={selectDate} />
         <CalendarSelectBox
           label="CalendarSelectBox"
           selectedDates={selectedDates}
           selectDate={selectDate}
         />
+        <BasicRating />
       </div>
+      <div className={`${TEST_AREA} space-y-2`}></div>
     </main>
   );
 };
