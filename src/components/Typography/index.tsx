@@ -82,7 +82,6 @@ const getTextAlign = (align: TypographyAlign) => {
   if (align === "right") {
     return "text-right";
   }
-  return "text-inherit";
 };
 
 const Typography: React.FC<P> = ({
