@@ -3,7 +3,10 @@
 import React, { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import Typography from "../Typography";
+<<<<<<< HEAD
 import Image from "next/image";
+=======
+>>>>>>> origin/use-storybook
 import DayWeekLabel from "./DayWeekLabel";
 
 interface CalendarProps {
@@ -21,7 +24,11 @@ const MonthlyCalendar: React.FC<CalendarProps> = ({
     const startOfMonth = month.startOf("month").startOf("week");
     const endOfMonth = month.endOf("month").endOf("week");
 
+<<<<<<< HEAD
     let days: dayjs.Dayjs[] = [];
+=======
+    const days: dayjs.Dayjs[] = [];
+>>>>>>> origin/use-storybook
     for (
       let day = startOfMonth;
       day.isBefore(endOfMonth);
@@ -42,7 +49,11 @@ const MonthlyCalendar: React.FC<CalendarProps> = ({
   };
 
   const isSelected = (day: dayjs.Dayjs) =>
+<<<<<<< HEAD
     selectedDates.some((selectedDate) => day.isSame(selectedDate, "day"));
+=======
+    selectedDates?.some((selectedDate) => day.isSame(selectedDate, "day"));
+>>>>>>> origin/use-storybook
 
   const renderCalendarGrid = (month: dayjs.Dayjs) => {
     const days = generateCalendarGrid(month);
@@ -85,14 +96,22 @@ const MonthlyCalendar: React.FC<CalendarProps> = ({
           {currentMonth.format("MMMM YYYY")}
         </Typography>
         <div className="flex">
+<<<<<<< HEAD
           <Image
+=======
+          <img
+>>>>>>> origin/use-storybook
             onClick={() => prevMonth()}
             src="/images/ic-pre.png"
             width={20}
             height={20}
             alt="prev"
           />
+<<<<<<< HEAD
           <Image
+=======
+          <img
+>>>>>>> origin/use-storybook
             onClick={() => nextMonth()}
             src="/images/ic-next.png"
             width={20}

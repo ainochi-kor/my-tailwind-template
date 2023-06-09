@@ -1,8 +1,16 @@
 import { PropsWithChildren, memo } from "react";
+<<<<<<< HEAD
 import { DEFAULT_TEXT_COLOR } from "src/constant/tailwindcss";
 import { JsxElement } from "typescript";
 
 interface P extends PropsWithChildren, ButtonProps {
+=======
+import { DEFAULT_TEXT_COLOR } from "../../constant/tailwindcss";
+
+interface ButtonProps
+  extends PropsWithChildren,
+    React.ButtonHTMLAttributes<HTMLButtonElement> {
+>>>>>>> origin/use-storybook
   size?: ButtonSize;
   theme?: ButtonTheme;
   fullWidth?: boolean;
@@ -32,7 +40,11 @@ const getButtonTheme = (theme?: ButtonTheme) => {
   return DEFAULT_TEXT_COLOR;
 };
 
+<<<<<<< HEAD
 const Button: React.FC<P> = ({
+=======
+const Button: React.FC<ButtonProps> = ({
+>>>>>>> origin/use-storybook
   children,
   size = "medium",
   theme,

@@ -90,7 +90,11 @@ const CalendarSelectBox: React.FC<P> = ({
         onClick={() => setOpen(!open)}
         className={`absolute left-3 text-grey-700 cursor-pointer ${
           open || selectedDates.length > 0
+<<<<<<< HEAD
             ? "text-micro text-primary -top-10px bg-white px-1 rounded-sm"
+=======
+            ? "text-micro text-primary -top-2.5 bg-white px-1 rounded-sm"
+>>>>>>> origin/use-storybook
             : "text-small top-1/4"
         } transition-all duration-200 z-30`}
       >

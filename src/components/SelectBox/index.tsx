@@ -168,7 +168,11 @@ const SelectBox: React.FC<P> = ({
       <label
         className={`absolute left-3  ${
           open || (value && value?.length > 0)
+<<<<<<< HEAD
             ? "text-micro text-blue-500 -top-10px bg-white px-1 rounded-sm"
+=======
+            ? "text-micro text-blue-500 -top-2.5 bg-white px-1 rounded-sm"
+>>>>>>> origin/use-storybook
             : "text-small top-1/4 text-gray-700"
         } transition-all duration-200`}
       >

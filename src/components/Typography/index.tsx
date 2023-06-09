@@ -82,6 +82,10 @@ const getTextAlign = (align: TypographyAlign) => {
   if (align === "right") {
     return "text-right";
   }
+<<<<<<< HEAD
+=======
+  return "text-inherit";
+>>>>>>> origin/use-storybook
 };
 
 const Typography: React.FC<P> = ({

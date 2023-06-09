@@ -28,7 +28,11 @@ const TextField: React.FC<P> = ({ label, type = "text", ...props }) => {
         htmlFor={props.id}
         className={`absolute left-3  ${
           focus || props.value
+<<<<<<< HEAD
             ? "text-micro -top-10px bg-white px-1 rounded-sm"
+=======
+            ? "text-micro -top-2.5 bg-white px-1 rounded-sm"
+>>>>>>> origin/use-storybook
             : "text-small top-1/4"
         } ${
           focus ? "text-blue-500" : "text-gray-700"
